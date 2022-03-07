@@ -1,10 +1,14 @@
 var express = require("express");
 var router = express.Router();
-const { auth } = require("../auth/auth.js");
+const { auth } = require("../auth/auth");
+const User = require("../controllers/user");
 
-// GET all sauces
-router.get("/api/", function (req, res, next) {
-  res.status(200).json("Ok super");
+router.post("/api/signup", function (req, res, next) {
+  User.createUser(res, req, next).catch((error) => next(error));
+});
+
+router.post("/api/login", function (req, res, next) {
+  User.login(res, req, next).catch((error) => next(error));
 });
 
 module.exports = router;

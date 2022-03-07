@@ -1,6 +1,8 @@
 const express = require("express");
 var router = require("./router/router.js");
 const bodyParser = require("body-parser");
+const { handleError } = require("./helpers/error");
+const db = require("./db/db.js");
 require("dotenv").config();
 
 const app = express();
@@ -15,6 +17,18 @@ app.use(function (req, res, next) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(router);
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+app.use(function (err, req, res, next) {
+  handleError(err, res);
 });
+try {
+  db.authenticate().then(() => {
+    app.listen(port, () => {
+      console.log(`Example app listening on port ${port}`);
+      db.sync({ alter: true }).then(() => {
+        console.log("All models synched");
+      });
+    });
+  });
+} catch (error) {
+  console.log(error);
+}
