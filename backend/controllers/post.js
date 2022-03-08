@@ -55,4 +55,16 @@ function updatePost(res, req, next) {
   });
 }
 
-module.exports = { createPost, updatePost, getPostById };
+function deletePost(res, req, next) {
+  return Post.destroy({
+    where: {
+      id: req.params.id,
+    },
+  }).then((destroyed) => {
+    if (destroyed) {
+      res.status(200).json({ status: "SUCCESS", message: "Post deleted successfully" });
+    } else next(new ErrorHandler(404, "POST_ERR_005", ["Post not found"]));
+  });
+}
+
+module.exports = { createPost, updatePost, getPostById, deletePost };

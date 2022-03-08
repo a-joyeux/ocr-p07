@@ -7,14 +7,7 @@ function createComment(res, req, next) {
       res.status(201).json({ status: "SUCCESS", message: "Comment created successfully" });
     })
     .catch((error) => {
-      console.log(error);
-      next(
-        new ErrorHandler(
-          500,
-          "COMMENT_ERR_001",
-          error.errors.map((err) => err.message)
-        )
-      );
+      next(new ErrorHandler(500, "COMMENT_ERR_001", error.message));
     });
 }
 

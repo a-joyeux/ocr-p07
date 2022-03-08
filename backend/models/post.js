@@ -32,6 +32,6 @@ Post.init(
   }
 );
 
-User.hasOne(Post, { foreignKey: "author" });
+User.hasOne(Post, { foreignKey: "author", onDelete: "cascade" });
 
 module.exports = Post;
