@@ -18,6 +18,13 @@ function createComment(res, req, next) {
     });
 }
 
+function getCommentById(res, req, next) {
+  return Comment.findByPk(req.params.id).then((comment) => {
+    if (!comment) next(new ErrorHandler(404, "COMMENT_ERR_004", ["Comment not found"]));
+    else res.status(200).json(comment);
+  });
+}
+
 function updateComment(res, req, next) {
   return Comment.findByPk(req.params.id)
     .then((comment) => {
@@ -51,4 +58,4 @@ function updateComment(res, req, next) {
     });
 }
 
-module.exports = { createComment, updateComment };
+module.exports = { createComment, updateComment, getCommentById };
