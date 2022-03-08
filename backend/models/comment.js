@@ -15,7 +15,7 @@ Comment.init(
         notEmpty: true,
       },
     },
-    post: {
+    postId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -26,11 +26,11 @@ Comment.init(
   },
   {
     sequelize,
-    modelName: "Post",
+    modelName: "Comment",
   }
 );
 
-Post.hasOne(Comment, { foreignKey: "post" });
+Post.hasOne(Comment, { foreignKey: "postId" });
 User.hasOne(Comment, { foreignKey: "author" });
 
-module.exports = Post;
+module.exports = Comment;

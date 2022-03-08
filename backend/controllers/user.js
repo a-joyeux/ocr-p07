@@ -25,7 +25,7 @@ function login(res, req, next) {
     .then((user) => {
       bcrypt.compare(req.body.password, user.password).then((result) => {
         if (result) {
-          token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET);
+          token = jwt.sign({ id: user.id, email: user.email, role: user.role }, process.env.JWT_SECRET);
           res.status(200).json({ token: token });
         } else {
           next(new ErrorHandler(404, "USER_ERR_002", ["Invalid credentials"]));
