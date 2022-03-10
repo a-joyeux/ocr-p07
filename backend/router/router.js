@@ -13,6 +13,14 @@ router.post("/api/login", function (req, res, next) {
   User.login(res, req, next).catch((error) => next(error));
 });
 
+router.get("/api/post", auth, function (req, res, next) {
+  Post.getAllPost(res, req, next).catch((error) => next(error));
+});
+
+router.get("/api/comment", auth, function (req, res, next) {
+  Comment.getAllCommentFromPost(res, req, next).catch((error) => next(error));
+});
+
 router.post("/api/post", auth, function (req, res, next) {
   Post.createPost(res, req, next).catch((error) => next(error));
 });

@@ -11,6 +11,17 @@ function createComment(res, req, next) {
     });
 }
 
+function getAllCommentFromPost(res, req, next) {
+  return Comment.findAll({
+    where: {
+      postId: req.query.postId,
+    },
+  }).then((comments) => {
+    if (comments.length == 0) next(new ErrorHandler(404, "POST_ERR_004", ["Comment not found"]));
+    else res.status(200).json(comments);
+  });
+}
+
 function getCommentById(res, req, next) {
   return Comment.findByPk(req.params.id).then((comment) => {
     if (!comment) next(new ErrorHandler(404, "COMMENT_ERR_004", ["Comment not found"]));
@@ -63,4 +74,4 @@ function deleteComment(res, req, next) {
   });
 }
 
-module.exports = { createComment, updateComment, getCommentById, deleteComment };
+module.exports = { createComment, updateComment, getCommentById, deleteComment, getAllCommentFromPost };

@@ -18,6 +18,13 @@ function createPost(res, req, next) {
     });
 }
 
+function getAllPost(res, req, next) {
+  return Post.findAll().then((posts) => {
+    if (posts.length == 0) next(new ErrorHandler(404, "POST_ERR_004", ["Post not found"]));
+    else res.status(200).json(posts);
+  });
+}
+
 function getPostById(res, req, next) {
   return Post.findByPk(req.params.id).then((post) => {
     if (!post) next(new ErrorHandler(404, "POST_ERR_004", ["Post not found"]));
@@ -67,4 +74,4 @@ function deletePost(res, req, next) {
   });
 }
 
-module.exports = { createPost, updatePost, getPostById, deletePost };
+module.exports = { createPost, updatePost, getPostById, deletePost, getAllPost };
