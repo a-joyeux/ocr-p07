@@ -41,4 +41,8 @@ router.delete("/api/post/:id", auth, function (req, res, next) {
   Post.deletePost(res, req, next).catch((error) => next(error));
 });
 
+router.delete("/api/comment/:id", auth, function (req, res, next) {
+  Comment.deleteComment(res, req, next).catch((error) => next(error));
+});
+
 module.exports = router;

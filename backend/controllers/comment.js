@@ -51,4 +51,16 @@ function updateComment(res, req, next) {
     });
 }
 
-module.exports = { createComment, updateComment, getCommentById };
+function deleteComment(res, req, next) {
+  return Comment.destroy({
+    where: {
+      id: req.params.id,
+    },
+  }).then((destroyed) => {
+    if (destroyed) {
+      res.status(200).json({ status: "SUCCESS", message: "Comment deleted successfully" });
+    } else next(new ErrorHandler(404, "COMMENT_ERR_004", ["Comment not found"]));
+  });
+}
+
+module.exports = { createComment, updateComment, getCommentById, deleteComment };
