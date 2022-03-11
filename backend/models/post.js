@@ -34,5 +34,6 @@ Post.init(
 );
 
 Post.hasMany(Comment, { foreignKey: "postId", onDelete: "cascade" });
+Comment.belongsTo(Post, { foreignKey: "postId" });
 
 module.exports = Post;

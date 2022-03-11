@@ -1,5 +1,6 @@
 const { ErrorHandler } = require("../helpers/error");
 const Comment = require("../models/comment");
+const User = require("../models/user");
 
 function createComment(res, req, next) {
   return Comment.create({ ...req.body, author: req.user.id }, { fields: ["content", "postId", "author"] })
@@ -11,15 +12,25 @@ function createComment(res, req, next) {
     });
 }
 
-function getAllCommentFromPost(res, req, next) {
-  return Comment.findAll({
-    where: {
-      postId: req.query.postId,
-    },
-  }).then((comments) => {
-    if (comments.length == 0) next(new ErrorHandler(404, "POST_ERR_004", ["Comment not found"]));
-    else res.status(200).json(comments);
-  });
+function getAllComment(res, req, next) {
+  return Comment.findAll({ include: { model: User, attributes: ["id", "email"] } })
+    .then((comments) => {
+      if (comments.length == 0) next(new ErrorHandler(404, "POST_ERR_004", ["Comment not found"]));
+      else {
+        const filters = req.query;
+        const filteredComments = comments.filter((comment) => {
+          let isValid = true;
+          for (key in filters) {
+            isValid = isValid && comment[key] == filters[key];
+          }
+          return isValid;
+        });
+        res.status(200).json(filteredComments);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 
 function getCommentById(res, req, next) {
@@ -74,4 +85,4 @@ function deleteComment(res, req, next) {
   });
 }
 
-module.exports = { createComment, updateComment, getCommentById, deleteComment, getAllCommentFromPost };
+module.exports = { createComment, updateComment, getCommentById, deleteComment, getAllComment };

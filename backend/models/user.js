@@ -41,9 +41,12 @@ User.init(
 User.hasMany(Comment, { foreignKey: "author", onDelete: "cascade" });
 User.hasMany(Post, { foreignKey: "author", onDelete: "cascade" });
 
+Comment.belongsTo(User, { foreignKey: "author" });
+Post.belongsTo(User, { foreignKey: "author" });
+
 User.beforeCreate((user, options) => {
   return bcrypt
-    .hash(user.password, 10)
+    .hash(user.password, SALT_WORK_FACTOR)
     .then((hash) => {
       user.password = hash;
     })

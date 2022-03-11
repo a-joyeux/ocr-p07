@@ -18,7 +18,7 @@ router.get("/api/post", auth, function (req, res, next) {
 });
 
 router.get("/api/comment", auth, function (req, res, next) {
-  Comment.getAllCommentFromPost(res, req, next).catch((error) => next(error));
+  Comment.getAllComment(res, req, next).catch((error) => next(error));
 });
 
 router.post("/api/post", auth, function (req, res, next) {
@@ -35,14 +35,6 @@ router.put("/api/post/:id", auth, function (req, res, next) {
 
 router.put("/api/comment/:id", auth, function (req, res, next) {
   Comment.updateComment(res, req, next).catch((error) => next(error));
-});
-
-router.get("/api/post/:id", auth, function (req, res, next) {
-  Post.getPostById(res, req, next).catch((error) => next(error));
-});
-
-router.get("/api/comment/:id", auth, function (req, res, next) {
-  Comment.getCommentById(res, req, next).catch((error) => next(error));
 });
 
 router.delete("/api/post/:id", auth, function (req, res, next) {
