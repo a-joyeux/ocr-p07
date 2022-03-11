@@ -3,8 +3,10 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import EmailIcon from "@mui/icons-material/Email";
 import LockIcon from "@mui/icons-material/Lock";
+import SendIcon from "@mui/icons-material/Send";
+import Button from "@mui/material/Button";
 
-class FormSignUp extends React.Component {
+class FormLogin extends React.Component {
   render() {
     return (
       <React.Fragment>
@@ -13,6 +15,7 @@ class FormSignUp extends React.Component {
           size="small"
           label="Email"
           margin="normal"
+          type="email"
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -25,6 +28,7 @@ class FormSignUp extends React.Component {
         <TextField
           id="password"
           size="small"
+          type="password"
           label="Password"
           margin="normal"
           InputProps={{
@@ -36,9 +40,12 @@ class FormSignUp extends React.Component {
           }}
           variant="outlined"
         />
+        <Button sx={{ mt: "20px" }} variant="contained" endIcon={<SendIcon />}>
+          Login
+        </Button>
       </React.Fragment>
     );
   }
 }
 
-export default FormSignUp;
+export default FormLogin;

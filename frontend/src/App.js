@@ -1,7 +1,7 @@
 import * as React from "react";
 import Container from "@mui/material/Container";
 import Logo from "./components/Logo";
-import FormSignUp from "./components/FormSignUp";
+import FormSignUp from "./components/FormLogin";
 import "./app.scss";
 
 function App() {
