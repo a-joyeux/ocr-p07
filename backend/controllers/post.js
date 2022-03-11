@@ -1,5 +1,6 @@
 const { ErrorHandler } = require("../helpers/error");
 const Post = require("../models/post");
+const Comment = require("../models/comment");
 
 function createPost(res, req, next) {
   return Post.create({ ...req.body, author: req.user.id })
@@ -19,10 +20,24 @@ function createPost(res, req, next) {
 }
 
 function getAllPost(res, req, next) {
-  return Post.findAll().then((posts) => {
-    if (posts.length == 0) next(new ErrorHandler(404, "POST_ERR_004", ["Post not found"]));
-    else res.status(200).json(posts);
-  });
+  return Post.findAll({ include: Comment })
+    .then((posts) => {
+      if (posts.length == 0) next(new ErrorHandler(404, "POST_ERR_004", ["Post not found"]));
+      else {
+        const filters = req.query;
+        const filteredPosts = posts.filter((post) => {
+          let isValid = true;
+          for (key in filters) {
+            isValid = isValid && post[key] == filters[key];
+          }
+          return isValid;
+        });
+        res.status(200).json(filteredPosts);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 
 function getPostById(res, req, next) {

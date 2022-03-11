@@ -3,6 +3,8 @@ const sequelize = require("../db/db.js");
 const uuid = require("uuid");
 const bcrypt = require("bcrypt");
 const ErrorHandler = require("../helpers/error");
+const Comment = require("../models/comment");
+const Post = require("../models/post");
 var SALT_WORK_FACTOR = 10;
 
 class User extends Model {}
@@ -35,6 +37,9 @@ User.init(
     modelName: "User", // We need to choose the model name
   }
 );
+
+User.hasMany(Comment, { foreignKey: "author", onDelete: "cascade" });
+User.hasMany(Post, { foreignKey: "author", onDelete: "cascade" });
 
 User.beforeCreate((user, options) => {
   return bcrypt
