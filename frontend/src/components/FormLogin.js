@@ -10,6 +10,7 @@ import Alert from '@mui/material/Alert';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../services/axios';
 import { useState } from 'react';
+import AuthService from '../services/auth';
 import './styles/FormLogin.scss';
 
 function FormLogin() {
@@ -58,8 +59,7 @@ function FormLogin() {
         <Button
           onClick={(event) => {
             event.preventDefault();
-            axiosInstance
-              .post('/api/login', { email: email, password: password })
+            AuthService.login(email, password)
               .then((response) => {
                 navigate('/home', { replace: true });
               })

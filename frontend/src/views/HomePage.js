@@ -1,9 +1,23 @@
-import * as React from "react";
+import PostService from '../services/post';
+import * as React from 'react';
+import { useState, useEffect } from 'react';
+import Post from '../components/Post';
+import './styles/homepage.scss';
 
-class HomePage extends React.Component {
-  render() {
-    return <p>toto est content</p>;
-  }
+function HomePage() {
+  const [state, setState] = useState([]);
+  useEffect(() => {
+    PostService.getAllPost().then((posts) => {
+      setState(posts.data);
+    });
+  }, []);
+  return (
+    <div className='postList'>
+      {state.map((post) => {
+        return <>{Post(post)}</>;
+      })}
+    </div>
+  );
 }
 
 export default HomePage;
