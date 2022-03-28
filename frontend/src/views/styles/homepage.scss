@@ -2,4 +2,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 10px;
+  border: 1px solid;
+  align-items: center;
+}
+
+.icon {
+  width: 150px;
 }

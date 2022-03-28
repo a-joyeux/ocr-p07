@@ -3,6 +3,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import Post from '../components/Post';
 import './styles/homepage.scss';
+import icon from '../img/icon-left-font.svg';
 
 function HomePage() {
   const [state, setState] = useState([]);
@@ -12,11 +13,15 @@ function HomePage() {
     });
   }, []);
   return (
-    <div className='postList'>
-      {state.map((post) => {
-        return <>{Post(post)}</>;
-      })}
-    </div>
+    <React.Fragment>
+      <h2>Posts</h2>
+      <div className='postList'>
+        {state.map((post) => {
+          return <>{Post(post)}</>;
+        })}
+        <img className='icon' src={icon}></img>
+      </div>
+    </React.Fragment>
   );
 }
 

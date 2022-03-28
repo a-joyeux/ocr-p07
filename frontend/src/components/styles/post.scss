@@ -4,7 +4,22 @@
   flex-direction: column;
   &-header {
     padding: 5px;
-    margin: 5px;
-    border: 1px solid gainsboro;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    background-color: #053c5e;
   }
+  &-content {
+    padding: 10px;
+  }
+  border: 1px solid gainsboro;
+}
+
+.author {
+  font-weight: bold;
+}
+
+.date {
+  font-style: italic;
+  font-size: 12px;
 }
