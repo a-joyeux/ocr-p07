@@ -3,7 +3,6 @@ import { BrowserRouter } from 'react-router-dom';
 import './styles/post.scss';
 
 function Post(post) {
-  console.log(post);
   return (
     <div className='post'>
       <div className='post-header'>
