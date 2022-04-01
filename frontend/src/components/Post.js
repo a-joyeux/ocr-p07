@@ -6,7 +6,7 @@ function Post(post) {
   return (
     <div className='post'>
       <div className='post-header'>
-        <span className='author'>{post.User.email}</span>
+        <span className='author'>{post.User.firstName + ' ' + post.User.lastName}</span>
         <span className='date'>
           {new Date(post.createdAt).toLocaleDateString(navigator.language, {
             hour: 'numeric',
