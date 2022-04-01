@@ -25,7 +25,7 @@ function getAllPost(res, req, next) {
     include: [
       {
         model: User,
-        attributes: ['email'],
+        attributes: ['lastName', 'firstName'],
       },
       {
         model: Comment,

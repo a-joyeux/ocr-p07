@@ -1,16 +1,30 @@
-const { Sequelize, DataTypes, Model } = require("sequelize");
-const sequelize = require("../db/db.js");
-const uuid = require("uuid");
-const bcrypt = require("bcrypt");
-const ErrorHandler = require("../helpers/error");
-const Comment = require("../models/comment");
-const Post = require("../models/post");
+const { Sequelize, DataTypes, Model } = require('sequelize');
+const sequelize = require('../db/db.js');
+const uuid = require('uuid');
+const bcrypt = require('bcrypt');
+const ErrorHandler = require('../helpers/error');
+const Comment = require('../models/comment');
+const Post = require('../models/post');
 var SALT_WORK_FACTOR = 10;
 
 class User extends Model {}
 
 User.init(
   {
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -29,20 +43,20 @@ User.init(
     },
     role: {
       type: DataTypes.STRING,
-      defaultValue: "Member",
+      defaultValue: 'Member',
     },
   },
   {
     sequelize, // We need to pass the connection instance
-    modelName: "User", // We need to choose the model name
+    modelName: 'User', // We need to choose the model name
   }
 );
 
-User.hasMany(Comment, { foreignKey: "author", onDelete: "cascade" });
-User.hasMany(Post, { foreignKey: "author", onDelete: "cascade" });
+User.hasMany(Comment, { foreignKey: 'author', onDelete: 'cascade' });
+User.hasMany(Post, { foreignKey: 'author', onDelete: 'cascade' });
 
-Comment.belongsTo(User, { foreignKey: "author" });
-Post.belongsTo(User, { foreignKey: "author" });
+Comment.belongsTo(User, { foreignKey: 'author' });
+Post.belongsTo(User, { foreignKey: 'author' });
 
 User.beforeCreate((user, options) => {
   return bcrypt
@@ -51,7 +65,7 @@ User.beforeCreate((user, options) => {
       user.password = hash;
     })
     .catch((err) => {
-      throw new ErrorHandler(500, ["Password cannot be hashed"]);
+      throw new ErrorHandler(500, ['Password cannot be hashed']);
     });
 });
 module.exports = User;
