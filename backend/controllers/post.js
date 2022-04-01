@@ -29,6 +29,12 @@ function getAllPost(res, req, next) {
       },
       {
         model: Comment,
+        include: [
+          {
+            model: User,
+            attributes: ['lastName', 'firstName'],
+          },
+        ],
       },
     ],
   })

@@ -1,0 +1,19 @@
+.comment-list {
+  width: 100%;
+  background-color: gainsboro;
+  .comment-title {
+    font-weight: bold;
+  }
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 10px 0px 10px;
+  &-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

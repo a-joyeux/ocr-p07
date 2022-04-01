@@ -2,6 +2,7 @@ import PostService from '../services/post';
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import Post from '../components/Post';
+import Comment from '../components/Comment';
 import HomeHeader from '../components/HomeHeader';
 import Container from '@mui/material/Container';
 import './styles/homepage.scss';
@@ -13,12 +14,18 @@ function HomePage() {
       setState(posts.data);
     });
   }, []);
+
   return (
     <Container className='container' maxWidth='sm'>
       <HomeHeader></HomeHeader>
       <div className='postList'>
         {state.map((post) => {
-          return <>{Post(post)}</>;
+          return (
+            <>
+              {Post(post)}
+              {Comment(post.Comments)}
+            </>
+          );
         })}
       </div>
     </Container>
