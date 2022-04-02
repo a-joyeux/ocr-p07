@@ -7,12 +7,17 @@
     padding: 10px;
     color: white;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     background-color: #053c5e;
   }
   &-content {
     padding: 10px;
     font-size: 14px;
+  }
+  &-infos {
+    display: flex;
+    flex-direction: column;
   }
   border: 1px solid gainsboro;
 }

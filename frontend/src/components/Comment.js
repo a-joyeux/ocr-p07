@@ -1,5 +1,7 @@
 import * as React from 'react';
 import './styles/Comment.scss';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import IconButton from '@mui/material/IconButton';
 
 function Comment(comments) {
   if (comments.length > 0) {
@@ -19,6 +21,9 @@ function Comment(comments) {
                     month: 'long',
                     year: 'numeric',
                   })}
+                  <IconButton color='error' aria-label='delete'>
+                    <RemoveCircleOutlineIcon sx={{ fontSize: 14 }} />
+                  </IconButton>
                 </span>
               </div>
               <div className='comment-content'>{comment.content}</div>
