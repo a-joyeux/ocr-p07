@@ -43,7 +43,7 @@ User.init(
     },
     role: {
       type: DataTypes.STRING,
-      defaultValue: 'Member',
+      defaultValue: 'DEFAULT',
     },
   },
   {
