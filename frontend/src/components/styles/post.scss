@@ -4,7 +4,7 @@
   flex-direction: column;
   margin-top: 20px;
   &-header {
-    padding: 5px;
+    padding: 10px;
     color: white;
     display: flex;
     flex-direction: column;
@@ -12,6 +12,7 @@
   }
   &-content {
     padding: 10px;
+    font-size: 14px;
   }
   border: 1px solid gainsboro;
 }

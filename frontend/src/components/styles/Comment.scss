@@ -1,8 +1,16 @@
 .comment-list {
   width: 100%;
   background-color: gainsboro;
-  .comment-title {
-    font-weight: bold;
+  .comment {
+    &-title {
+      margin-left: 10px;
+      font-size: 14px;
+      font-style: italic;
+      text-decoration: underline;
+    }
+    font-size: 12px;
+    border-left: 1px solid;
+    margin: 10px;
   }
 }
 
