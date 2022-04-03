@@ -14,7 +14,7 @@ function HomePage() {
       setState(posts.data);
     });
   }, []);
-
+  
   return (
     <Container className='container' maxWidth='sm'>
       <HomeHeader></HomeHeader>
@@ -28,6 +28,7 @@ function HomePage() {
           );
         })}
       </div>
+     
     </Container>
   );
 }

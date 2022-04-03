@@ -22,11 +22,14 @@
   border: 1px solid gainsboro;
 }
 
-.author {
+.title {
   font-weight: bold;
 }
 
-.date {
+.meta-data {
   font-style: italic;
   font-size: 12px;
+  .author {
+    text-decoration: underline;
+  }
 }

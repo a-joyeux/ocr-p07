@@ -1,16 +1,19 @@
-import PostService from '../services/post';
 import * as React from 'react';
 import { useState } from 'react';
-import Post from '../components/Post';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import PostService from '../services/post';
 import './styles/NewPostPage.scss';
 
 function NewPostPage() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [open, setOpen] = useState(false);
+  const [alert, setAlert] = useState('');
+
   return (
     <Container className='container' maxWidth='sm'>
       <div className='newPost-header'>
@@ -42,7 +45,12 @@ function NewPostPage() {
           variant='outlined'
         />
         <Button
-          onClick={(event) => {}}
+          onClick={(event) => {
+            PostService.createPost(title, content).then((res) => {
+              setAlert(res.data.message);
+              setOpen(true);
+            });
+          }}
           disabled={title && content ? false : true}
           type='submit'
           sx={{ mt: '20px' }}
@@ -50,6 +58,7 @@ function NewPostPage() {
         >
           Valider
         </Button>
+        <Snackbar open={open} autoHideDuration={2000} message={alert} onClose={() => setOpen(false)} />
       </Box>
     </Container>
   );

@@ -14,8 +14,10 @@ function Post(post) {
     <div className='post'>
       <div className='post-header'>
         <div className='post-infos'>
-          <span className='author'>{post.User.firstName + ' ' + post.User.lastName}</span>
-          <span className='date'>
+          <span className='title'>{post.title}</span>
+          <span className='meta-data'>
+            <span className='author'>{post.User.firstName + ' ' + post.User.lastName}</span>
+            <> @ </>
             {new Date(post.createdAt).toLocaleDateString(navigator.language, {
               hour: 'numeric',
               minute: 'numeric',
