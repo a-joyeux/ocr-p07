@@ -8,7 +8,6 @@ import SendIcon from '@mui/icons-material/Send';
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
 import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../services/axios';
 import { useState } from 'react';
 import AuthService from '../services/auth';
 import './styles/FormLogin.scss';
