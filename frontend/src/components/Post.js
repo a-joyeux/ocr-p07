@@ -2,6 +2,12 @@ import * as React from 'react';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import IconButton from '@mui/material/IconButton';
 import './styles/post.scss';
+import AuthService from '../services/auth';
+
+const isVisible = (isAdmin) => {
+  console.log(isAdmin);
+  return isAdmin == true ? 'inherit' : 'none';
+};
 
 function Post(post) {
   return (
@@ -19,7 +25,7 @@ function Post(post) {
             })}
           </span>
         </div>
-        <IconButton color='error' aria-label='delete'>
+        <IconButton sx={{ display: isVisible(AuthService.isAdmin()) }} color='error' aria-label='delete'>
           <RemoveCircleOutlineIcon fontSize='small' />
         </IconButton>
       </div>

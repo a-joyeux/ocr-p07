@@ -2,18 +2,18 @@ import * as React from 'react';
 import Container from '@mui/material/Container';
 import Logo from './components/Logo';
 import FormSignUp from './components/FormLogin';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-
-import { Link } from 'react-router-dom';
+import AuthService from './services/auth';
 import './app.scss';
 
 function App() {
-  return (
-    <Container className='container' maxWidth='sm'>
-      <Logo />
-      <FormSignUp />
-    </Container>
-  );
+  if (AuthService.getCurrentUser()) {
+    return (
+      <Container className='container' maxWidth='sm'>
+        <Logo />
+        <FormSignUp />
+      </Container>
+    );
+  }
 }
 
 export default App;

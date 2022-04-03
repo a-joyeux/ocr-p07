@@ -26,10 +26,15 @@ const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem('user'));
 };
 
+const isAdmin = () => {
+  return getCurrentUser().role == 'ADMIN' ? true : false;
+};
+
 const AuthService = {
   register,
   login,
   logout,
+  isAdmin,
   getCurrentUser,
 };
 export default AuthService;

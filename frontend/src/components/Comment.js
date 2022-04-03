@@ -2,6 +2,12 @@ import * as React from 'react';
 import './styles/Comment.scss';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import IconButton from '@mui/material/IconButton';
+import AuthService from '../services/auth';
+
+const isVisible = (isAdmin) => {
+  console.log(isAdmin);
+  return isAdmin == true ? 'inline' : 'none';
+};
 
 function Comment(comments) {
   if (comments.length > 0) {
@@ -21,7 +27,7 @@ function Comment(comments) {
                     month: 'long',
                     year: 'numeric',
                   })}
-                  <IconButton color='error' aria-label='delete'>
+                  <IconButton sx={{ display: isVisible(AuthService.isAdmin()) }} color='error' aria-label='delete'>
                     <RemoveCircleOutlineIcon sx={{ fontSize: 14 }} />
                   </IconButton>
                 </span>
