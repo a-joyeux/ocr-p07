@@ -5,6 +5,8 @@ import Post from '../components/Post';
 import Comment from '../components/Comment';
 import HomeHeader from '../components/HomeHeader';
 import Container from '@mui/material/Container';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
 import './styles/homepage.scss';
 
 function HomePage() {
@@ -14,21 +16,20 @@ function HomePage() {
       setState(posts.data);
     });
   }, []);
-  
+
   return (
     <Container className='container' maxWidth='sm'>
       <HomeHeader></HomeHeader>
       <div className='postList'>
         {state.map((post) => {
           return (
-            <>
+            <div className='card'>
               {Post(post)}
               {Comment(post.Comments)}
-            </>
+            </div>
           );
         })}
       </div>
-     
     </Container>
   );
 }

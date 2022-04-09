@@ -1,11 +1,13 @@
 .comment-list {
   width: 100%;
-  background-color: gainsboro;
-
+  padding: 5px 0px 15px 5px;
   .comment {
     display: flex;
     flex-direction: column;
     padding: 0px 10px 0px 10px;
+    .author {
+      font-weight: bold;
+    }
     &-header {
       display: flex;
       flex-direction: row;
@@ -19,6 +21,5 @@
       text-decoration: underline;
     }
     font-size: 12px;
-    margin: 5px 0px 5px 5px;
   }
 }
