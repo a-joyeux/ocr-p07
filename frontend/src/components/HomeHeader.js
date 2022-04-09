@@ -1,26 +1,22 @@
 import * as React from 'react';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
+import PostModal from './PostModal';
 
 import './styles/HomeHeader.scss';
 
 function HomeHeader() {
-  let navigate = useNavigate();
   return (
     <div className='home-header'>
       <h2>Fil d'actualité</h2>
-      <Button
-        onClick={(event) => {
-          navigate('/post', { replace: true });
-        }}
-        className='button'
-        variant='outlined'
-        size='small'
-        startIcon={<AddBoxIcon />}
-      >
-        Nouveau
-      </Button>
+      <div>{PostModal()}</div>
     </div>
   );
 }

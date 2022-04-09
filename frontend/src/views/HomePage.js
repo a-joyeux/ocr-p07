@@ -21,14 +21,18 @@ function HomePage() {
     <Container className='container' maxWidth='sm'>
       <HomeHeader></HomeHeader>
       <div className='postList'>
-        {state.map((post) => {
-          return (
-            <div className='card'>
-              {Post(post)}
-              {Comment(post.Comments)}
-            </div>
-          );
-        })}
+        {state
+          .sort(function (a, b) {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+          })
+          .map((post) => {
+            return (
+              <div className='card'>
+                {Post(post)}
+                {Comment(post.Comments)}
+              </div>
+            );
+          })}
       </div>
     </Container>
   );
