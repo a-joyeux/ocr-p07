@@ -30,11 +30,16 @@ const isAdmin = () => {
   return getCurrentUser().role == 'ADMIN' ? true : false;
 };
 
+const isOwner = (author) => {
+  return author == getCurrentUser().id ? true : false;
+};
+
 const AuthService = {
   register,
   login,
   logout,
   isAdmin,
   getCurrentUser,
+  isOwner,
 };
 export default AuthService;

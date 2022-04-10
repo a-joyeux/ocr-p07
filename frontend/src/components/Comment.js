@@ -5,8 +5,8 @@ import IconButton from '@mui/material/IconButton';
 import AuthService from '../services/auth';
 import CommentService from '../services/comment';
 
-const isVisible = (isAdmin) => {
-  return isAdmin == true ? 'inline' : 'none';
+const isVisible = (isAdmin, isOwner) => {
+  return isAdmin || isOwner == true ? 'inline' : 'none';
 };
 
 function Comment(comments, reload) {
@@ -38,7 +38,7 @@ function Comment(comments, reload) {
                   })}
                   <IconButton
                     data-id={comment.id}
-                    sx={{ display: isVisible(AuthService.isAdmin()) }}
+                    sx={{ display: isVisible(AuthService.isAdmin(), AuthService.isOwner(comment.author)) }}
                     color='error'
                     aria-label='delete'
                     onClick={deleteComment}

@@ -6,8 +6,8 @@ import AuthService from '../services/auth';
 import PostService from '../services/post';
 import { useState } from 'react';
 
-const isVisible = (isAdmin) => {
-  return isAdmin == true ? 'inherit' : 'none';
+const isVisible = (isAdmin, isOwner) => {
+  return isAdmin || isOwner == true ? 'inherit' : 'none';
 };
 
 function Post(post, reload) {
@@ -40,7 +40,7 @@ function Post(post, reload) {
         <IconButton
           data-id={post.id}
           onClick={deletePost}
-          sx={{ display: isVisible(AuthService.isAdmin()) }}
+          sx={{ display: isVisible(AuthService.isAdmin(), AuthService.isOwner(post.author)) }}
           color='error'
           aria-label='delete'
         >
