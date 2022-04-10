@@ -34,9 +34,9 @@ function HomePage() {
           })
           .map((post) => {
             return (
-              <div key={post.id} className='card'>
+              <div key={'post' + post.id} className='card'>
                 {Post(post, reload)}
-                {Comment(post.Comments)}
+                {Comment(post.Comments, reload)}
               </div>
             );
           })}

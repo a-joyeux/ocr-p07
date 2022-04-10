@@ -3,19 +3,29 @@ import './styles/Comment.scss';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import IconButton from '@mui/material/IconButton';
 import AuthService from '../services/auth';
+import CommentService from '../services/comment';
 
 const isVisible = (isAdmin) => {
   return isAdmin == true ? 'inline' : 'none';
 };
 
-function Comment(comments) {
+function Comment(comments, reload) {
+  const deleteComment = (e) => {
+    const id = e.target.getAttribute('data-id');
+
+    CommentService.deleteComment(id).then((res) => {
+      reload();
+      return JSON.stringify(res);
+    });
+  };
+
   if (comments.length > 0) {
     return (
       <div className='comment-list'>
         <span className='comment-title'>Commentaires</span>
         {comments.map((comment) => {
           return (
-            <div data-id={comment.id} className='comment'>
+            <div key={'comment' + comment.id} data-id={comment.id} className='comment'>
               <div className='comment-header'>
                 <span className='author'>{comment.User.firstName + ' ' + comment.User.lastName}</span>
                 <span className='date'>
@@ -26,8 +36,14 @@ function Comment(comments) {
                     month: 'long',
                     year: 'numeric',
                   })}
-                  <IconButton sx={{ display: isVisible(AuthService.isAdmin()) }} color='error' aria-label='delete'>
-                    <RemoveCircleOutlineIcon sx={{ fontSize: 14 }} />
+                  <IconButton
+                    data-id={comment.id}
+                    sx={{ display: isVisible(AuthService.isAdmin()) }}
+                    color='error'
+                    aria-label='delete'
+                    onClick={deleteComment}
+                  >
+                    <RemoveCircleOutlineIcon data-id={comment.id} sx={{ fontSize: 14 }} />
                   </IconButton>
                 </span>
               </div>
