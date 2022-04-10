@@ -5,7 +5,6 @@ import './styles/post.scss';
 import AuthService from '../services/auth';
 
 const isVisible = (isAdmin) => {
-  console.log(isAdmin);
   return isAdmin == true ? 'inherit' : 'none';
 };
 

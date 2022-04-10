@@ -8,6 +8,17 @@
   width: 150px;
 }
 
+.home-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button {
+  height: 50%;
+}
+
 .card {
   border: 1px solid;
   display: flex;

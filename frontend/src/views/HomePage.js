@@ -3,23 +3,26 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import Post from '../components/Post';
 import Comment from '../components/Comment';
-import HomeHeader from '../components/HomeHeader';
 import Container from '@mui/material/Container';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
+import PostModal from '../components/PostModal';
 import './styles/homepage.scss';
 
 function HomePage() {
   const [state, setState] = useState([]);
+  const [reload, setReload] = useState(false);
+
   useEffect(() => {
     PostService.getAllPost().then((posts) => {
       setState(posts.data);
     });
-  }, []);
+  }, [reload]);
 
   return (
     <Container className='container' maxWidth='sm'>
-      <HomeHeader></HomeHeader>
+      <div className='home-header'>
+        <h2>Fil d'actualité</h2>
+        <div>{PostModal(setReload)}</div>
+      </div>
       <div className='postList'>
         {state
           .sort(function (a, b) {

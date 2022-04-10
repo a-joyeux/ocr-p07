@@ -5,7 +5,6 @@ import IconButton from '@mui/material/IconButton';
 import AuthService from '../services/auth';
 
 const isVisible = (isAdmin) => {
-  console.log(isAdmin);
   return isAdmin == true ? 'inline' : 'none';
 };
 
