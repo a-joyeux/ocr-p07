@@ -9,19 +9,23 @@ import './styles/homepage.scss';
 
 function HomePage() {
   const [state, setState] = useState([]);
-  const [reload, setReload] = useState(false);
+  const [refresh, setRefresh] = useState(0);
+
+  const reload = () => {
+    setRefresh(refresh + 1);
+  };
 
   useEffect(() => {
     PostService.getAllPost().then((posts) => {
       setState(posts.data);
     });
-  }, [reload]);
+  }, [refresh]);
 
   return (
     <Container className='container' maxWidth='sm'>
       <div className='home-header'>
         <h2>Fil d'actualité</h2>
-        <div>{PostModal(setReload)}</div>
+        <div>{PostModal(reload)}</div>
       </div>
       <div className='postList'>
         {state
@@ -30,8 +34,8 @@ function HomePage() {
           })
           .map((post) => {
             return (
-              <div className='card'>
-                {Post(post)}
+              <div key={post.id} className='card'>
+                {Post(post, reload)}
                 {Comment(post.Comments)}
               </div>
             );

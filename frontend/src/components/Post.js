@@ -3,14 +3,25 @@ import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import IconButton from '@mui/material/IconButton';
 import './styles/post.scss';
 import AuthService from '../services/auth';
+import PostService from '../services/post';
+import { useState } from 'react';
 
 const isVisible = (isAdmin) => {
   return isAdmin == true ? 'inherit' : 'none';
 };
 
-function Post(post) {
+function Post(post, reload) {
+  const deletePost = (e) => {
+    const id = e.target.getAttribute('data-id');
+
+    PostService.deletePost(id).then((res) => {
+      reload();
+      return JSON.stringify(res);
+    });
+  };
+
   return (
-    <div className='post'>
+    <div data-id={post.id} className='post'>
       <div className='post-header'>
         <div className='post-infos'>
           <span className='title'>{post.title}</span>
@@ -26,8 +37,14 @@ function Post(post) {
             })}
           </span>
         </div>
-        <IconButton sx={{ display: isVisible(AuthService.isAdmin()) }} color='error' aria-label='delete'>
-          <RemoveCircleOutlineIcon fontSize='small' />
+        <IconButton
+          data-id={post.id}
+          onClick={deletePost}
+          sx={{ display: isVisible(AuthService.isAdmin()) }}
+          color='error'
+          aria-label='delete'
+        >
+          <RemoveCircleOutlineIcon data-id={post.id} fontSize='small' />
         </IconButton>
       </div>
       <div className='post-content'>{post.content}</div>

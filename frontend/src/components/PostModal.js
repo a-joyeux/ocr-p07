@@ -11,12 +11,13 @@ import PostService from '../services/post';
 import Snackbar from '@mui/material/Snackbar';
 import { useState } from 'react';
 
-function PostModal(setReload) {
+function PostModal(reload) {
   const [openModal, setOpenModal] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [alert, setAlert] = useState('');
+  const [trigger, setTrigger] = useState(0);
 
   const handleClickOpen = () => {
     setOpenModal(true);
@@ -67,7 +68,7 @@ function PostModal(setReload) {
                 setAlert(res.data.message);
                 setOpenAlert(true);
                 setOpenModal(false);
-                setReload(true);
+                reload();
               });
             }}
             disabled={title && content ? false : true}

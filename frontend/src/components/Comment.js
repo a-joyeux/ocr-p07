@@ -15,7 +15,7 @@ function Comment(comments) {
         <span className='comment-title'>Commentaires</span>
         {comments.map((comment) => {
           return (
-            <div className='comment'>
+            <div data-id={comment.id} className='comment'>
               <div className='comment-header'>
                 <span className='author'>{comment.User.firstName + ' ' + comment.User.lastName}</span>
                 <span className='date'>
