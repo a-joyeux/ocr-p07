@@ -4,11 +4,12 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import PostService from '../services/post';
 import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useState } from 'react';
 
 function PostModal(reload) {
@@ -28,9 +29,9 @@ function PostModal(reload) {
 
   return (
     <>
-      <Button onClick={handleClickOpen} className='button' variant='outlined' size='small' startIcon={<AddBoxIcon />}>
-        Nouveau
-      </Button>
+      <IconButton sx={{ color: 'white' }} onClick={handleClickOpen} aria-label='nouveau'>
+        <AddCircleIcon />
+      </IconButton>
       <Dialog open={openModal} onClose={handleClose}>
         <DialogTitle>Nouvelle publication</DialogTitle>
         <DialogContent>

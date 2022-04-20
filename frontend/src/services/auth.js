@@ -17,6 +17,9 @@ const login = (email, password) => {
         localStorage.setItem('user', JSON.stringify(response.data));
       }
       return response.data;
+    })
+    .catch((err) => {
+      console.log(err);
     });
 };
 const logout = () => {

@@ -2,7 +2,7 @@ import * as React from 'react';
 import Container from '@mui/material/Container';
 import Logo from './components/Logo';
 import FormLogin from './components/FormLogin';
-import AuthService from './services/auth';
+
 import './app.scss';
 
 function App() {

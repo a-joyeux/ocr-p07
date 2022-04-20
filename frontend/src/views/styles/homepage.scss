@@ -15,10 +15,6 @@
   align-items: center;
 }
 
-.button {
-  height: 50%;
-}
-
 .card {
   border: 1px solid;
   display: flex;
@@ -26,4 +22,8 @@
   border-radius: 15px;
   overflow: hidden;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.container {
+  margin-top: 20px;
 }
