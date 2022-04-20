@@ -1,7 +1,9 @@
 import axiosInstance from '../services/axios';
 
-const register = (email, password) => {
+const register = (firstName, lastName, email, password) => {
   return axiosInstance.post('/api/signup', {
+    firstName,
+    lastName,
     email,
     password,
   });

@@ -9,19 +9,43 @@ import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import AuthService from '../services/auth';
-import './styles/FormLogin.scss';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
+import './styles/FormSignUp.scss';
 
-function FormLogin() {
+function formSignUp() {
   let navigate = useNavigate();
   const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState([]);
   var visibilityState = error.length > 0 ? 'visible' : 'hidden';
   return (
     <React.Fragment>
-      <Box className='formLogin'>
+      <Box className='formSignUp'>
+        <TextField
+          id='firstName'
+          size='small'
+          label='Prénom'
+          margin='normal'
+          type='firstname'
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          InputLabelProps={{ shrink: true }}
+          variant='outlined'
+        />
+        <TextField
+          id='lastName'
+          size='small'
+          label='Nom'
+          margin='normal'
+          type='lastname'
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          variant='outlined'
+          InputLabelProps={{ shrink: true }}
+        />
         <TextField
           id='email'
           size='small'
@@ -59,34 +83,30 @@ function FormLogin() {
         <Button
           onClick={(event) => {
             event.preventDefault();
-            AuthService.login(email, password)
+            AuthService.register(firstName, lastName, email, password)
               .then((response) => {
-                navigate('/home', { replace: true });
+                navigate('/', { replace: true });
               })
               .catch((err) => {
+                console.log(err);
                 setError(err.response.data.message);
               });
           }}
-          disabled={email && password ? false : true}
+          disabled={firstName && lastName && email && password ? false : true}
           type='submit'
           sx={{ mt: '20px' }}
           variant='contained'
-          endIcon={<SendIcon />}
+          endIcon={<HowToRegIcon />}
         >
-          Login
+          Créer votre compte
         </Button>
-        <p>
-          <Link style={{ textDecoration: 'none' }} to='/signup'>
-            Pas encore de compte ?
-          </Link>
-        </p>
+
         <Alert style={{ visibility: visibilityState }} severity='error'>
           {error}
         </Alert>
-        ;
       </Box>
     </React.Fragment>
   );
 }
 
-export default FormLogin;
+export default formSignUp;
