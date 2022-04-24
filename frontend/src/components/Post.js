@@ -4,7 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import './styles/post.scss';
 import AuthService from '../services/auth';
 import PostService from '../services/post';
-import { useState } from 'react';
+import Divider from '@mui/material/Divider';
 
 const isVisible = (isAdmin, isOwner) => {
   return isAdmin || isOwner == true ? 'inherit' : 'none';

@@ -43,7 +43,7 @@ function FormLogin() {
           id='password'
           size='small'
           type='password'
-          label='Password'
+          label='Mot de passe'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           margin='normal'
@@ -64,7 +64,8 @@ function FormLogin() {
                 navigate('/home', { replace: true });
               })
               .catch((err) => {
-                setError(err.response.data.message);
+                console.log(err);
+                setError(err.toString());
               });
           }}
           disabled={email && password ? false : true}

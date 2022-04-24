@@ -67,7 +67,7 @@ function formSignUp() {
           id='password'
           size='small'
           type='password'
-          label='Password'
+          label='Mot de passe'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           margin='normal'
@@ -88,7 +88,6 @@ function formSignUp() {
                 navigate('/', { replace: true });
               })
               .catch((err) => {
-                console.log(err);
                 setError(err.response.data.message);
               });
           }}

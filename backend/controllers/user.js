@@ -28,12 +28,12 @@ function login(res, req, next) {
           token = jwt.sign({ id: user.id, email: user.email, role: user.role }, process.env.JWT_SECRET);
           res.status(200).json({ id: user.id, token: token, role: user.role });
         } else {
-          next(new ErrorHandler(404, 'USER_ERR_002', ['Invalid credentials']));
+          next(new ErrorHandler(404, 'USER_ERR_002', ['Email ou mot de passe incorrect']));
         }
       });
     })
     .catch((error) => {
-      next(new ErrorHandler(404, 'USER_ERR_002', ['Invalid credentials']));
+      next(new ErrorHandler(404, 'USER_ERR_002', ['Email ou mot de passe incorrect']));
     });
 }
 
