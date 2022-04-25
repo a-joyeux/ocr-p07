@@ -20,8 +20,25 @@ function createPost(res, req, next) {
     });
 }
 
+const getPagination = (page, size) => {
+  const limit = size ? +size : 5;
+  const offset = page ? page * limit : 0;
+  return { limit, offset };
+};
+
+const getPagingData = (data, page, limit) => {
+  const { count: totalItems, rows: posts } = data;
+  const currentPage = page ? +page : 0;
+  const totalPages = Math.ceil(totalItems / limit);
+  return { totalItems, posts, totalPages, currentPage };
+};
+
 function getAllPost(res, req, next) {
-  return Post.findAll({
+  const { page, size } = req.query;
+  const { limit, offset } = getPagination(page, size);
+  return Post.findAndCountAll({
+    limit,
+    offset,
     include: [
       {
         model: User,
@@ -41,15 +58,8 @@ function getAllPost(res, req, next) {
     .then((posts) => {
       if (posts.length == 0) next(new ErrorHandler(404, 'POST_ERR_004', ['Post not found']));
       else {
-        const filters = req.query;
-        const filteredPosts = posts.filter((post) => {
-          let isValid = true;
-          for (key in filters) {
-            isValid = isValid && post[key] == filters[key];
-          }
-          return isValid;
-        });
-        res.status(200).json(filteredPosts);
+        const response = getPagingData(posts, page, limit);
+        res.status(200).json(response);
       }
     })
     .catch((error) => {
