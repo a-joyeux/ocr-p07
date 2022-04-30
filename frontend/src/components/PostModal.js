@@ -10,6 +10,7 @@ import PostService from '../services/post';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+
 import { useState } from 'react';
 
 function PostModal(reload) {
@@ -69,7 +70,7 @@ function PostModal(reload) {
                 setAlert(res.data.message);
                 setOpenAlert(true);
                 setOpenModal(false);
-                reload();
+                window.location.reload(false);
               });
             }}
             disabled={title && content ? false : true}

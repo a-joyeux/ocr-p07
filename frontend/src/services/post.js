@@ -1,7 +1,7 @@
 import axiosInstance from '../services/axios';
 
-const getAllPost = () => {
-  return axiosInstance.get('/api/post');
+const getAllPost = (size, page) => {
+  return axiosInstance.get(`/api/post?size=${size}&page=${page}`);
 };
 
 const createPost = (title, content) => {

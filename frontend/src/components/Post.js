@@ -4,18 +4,16 @@ import IconButton from '@mui/material/IconButton';
 import './styles/post.scss';
 import AuthService from '../services/auth';
 import PostService from '../services/post';
-import Divider from '@mui/material/Divider';
 
 const isVisible = (isAdmin, isOwner) => {
   return isAdmin || isOwner == true ? 'inherit' : 'none';
 };
 
-function Post(post, reload) {
+function Post(post) {
   const deletePost = (e) => {
     const id = e.target.getAttribute('data-id');
-
     PostService.deletePost(id).then((res) => {
-      reload();
+      window.location.reload(false);
       return JSON.stringify(res);
     });
   };

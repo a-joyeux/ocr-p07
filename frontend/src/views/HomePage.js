@@ -15,7 +15,10 @@ import { useNavigate } from 'react-router-dom';
 
 function HomePage() {
   let navigate = useNavigate();
-  const [state, setState] = useState([]);
+  const size = 1;
+  const [totalPages, setTotalPages] = useState(1);
+  const [page, setPage] = useState(0);
+  const [post, setPost] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
@@ -40,20 +43,19 @@ function HomePage() {
     if (!AuthService.getCurrentUser()) {
       navigate('/', { replace: true });
     }
-    PostService.getAllPost().then((posts) => {
-      setState(posts.data);
+    PostService.getAllPost(size, page).then((res) => {
+      setPost([...post, ...res.data.posts]);
+      setTotalPages(res.data.totalPages);
     });
-  }, [refresh]);
+  }, [refresh, page]);
 
   return (
     <>
-      {TopBar("Fil d'actualité", reload)}
+      {TopBar("Fil d'actualité")}
       <Container className='container' maxWidth='md'>
         <div className='postList'>
-          {state
-            .sort(function (a, b) {
-              return new Date(b.createdAt) - new Date(a.createdAt);
-            })
+          {post
+            .filter((v, i, a) => a.findIndex((v2) => v2.id === v.id) === i)
             .map((post) => {
               return (
                 <div key={'post' + post.id} className='card'>
@@ -71,6 +73,7 @@ function HomePage() {
                 </div>
               );
             })}
+          {totalPages !== page && <button onClick={() => setPage(page + 1)}>{'Load More'}</button>}
         </div>
         {CommentInput(postId, reload, openModal, open, openAlert, alertMessage)}
         <Snackbar

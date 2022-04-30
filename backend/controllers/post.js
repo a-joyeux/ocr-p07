@@ -9,7 +9,6 @@ function createPost(res, req, next) {
       res.status(201).json({ status: 'SUCCESS', message: 'Post created successfully' });
     })
     .catch((error) => {
-      console.log(error);
       next(
         new ErrorHandler(
           500,
@@ -34,11 +33,12 @@ const getPagingData = (data, page, limit) => {
 };
 
 function getAllPost(res, req, next) {
-  const { page, size } = req.query;
+  const { size, page } = req.query;
   const { limit, offset } = getPagination(page, size);
   return Post.findAndCountAll({
     limit,
     offset,
+    order: [['updatedAt', 'DESC']],
     include: [
       {
         model: User,
