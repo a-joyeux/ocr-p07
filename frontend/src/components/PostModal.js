@@ -28,6 +28,19 @@ function PostModal(reload) {
     setOpenModal(false);
   };
 
+  const action = (
+    <Button
+      onClick={() => {
+        reload();
+        setOpenAlert(false);
+      }}
+      color='secondary'
+      size='small'
+    >
+      Reload
+    </Button>
+  );
+
   return (
     <>
       <IconButton sx={{ color: 'white' }} onClick={handleClickOpen} aria-label='nouveau'>
@@ -67,10 +80,9 @@ function PostModal(reload) {
           <Button
             onClick={(event) => {
               PostService.createPost(title, content).then((res) => {
-                setAlert(res.data.message);
+                setAlert('Nouveaux messages');
                 setOpenAlert(true);
                 setOpenModal(false);
-                window.location.reload(false);
               });
             }}
             disabled={title && content ? false : true}
@@ -79,7 +91,12 @@ function PostModal(reload) {
           </Button>
         </DialogActions>
       </Dialog>
-      <Snackbar open={openAlert} autoHideDuration={2000} message={alert} onClose={() => setOpenAlert(false)} />
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={openAlert}
+        message={alert}
+        action={action}
+      />
     </>
   );
 }

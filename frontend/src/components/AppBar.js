@@ -9,7 +9,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../services/auth';
 
-export default function TopBar(title) {
+export default function TopBar(title, reload) {
   let navigate = useNavigate();
 
   const handleClickOpen = () => {
@@ -33,7 +33,7 @@ export default function TopBar(title) {
           <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
             <>{title}</>
           </Typography>
-          {PostModal()}
+          {PostModal(reload)}
         </Toolbar>
       </AppBar>
     </Box>

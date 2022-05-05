@@ -11,22 +11,27 @@ import Container from '@mui/material/Container';
 import TopBar from '../components/AppBar';
 import AuthService from '../services/auth';
 import './styles/homepage.scss';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 import { useNavigate } from 'react-router-dom';
 
 function HomePage() {
   let navigate = useNavigate();
-  const size = 1;
+  const size = 2;
   const [totalPages, setTotalPages] = useState(1);
   const [page, setPage] = useState(0);
-  const [post, setPost] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [postId, setPostId] = useState(0);
   const [refresh, setRefresh] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   const reload = () => {
     setRefresh(refresh + 1);
+    setPosts([]);
+    setPage(0);
   };
 
   const open = (value) => {
@@ -34,32 +39,32 @@ function HomePage() {
   };
 
   const handleClick = (e) => {
-    console.log(e.target);
     setPostId(e.currentTarget.getAttribute('data-id'));
     setOpenModal(true);
   };
 
   useEffect(() => {
+    setIsLoading(false);
     if (!AuthService.getCurrentUser()) {
       navigate('/', { replace: true });
     }
     PostService.getAllPost(size, page).then((res) => {
-      setPost([...post, ...res.data.posts]);
+      setPosts([...posts, ...res.data.posts]);
       setTotalPages(res.data.totalPages);
     });
   }, [refresh, page]);
 
   return (
     <>
-      {TopBar("Fil d'actualité")}
+      {TopBar("Fil d'actualité", reload)}
       <Container className='container' maxWidth='md'>
         <div className='postList'>
-          {post
+          {posts
             .filter((v, i, a) => a.findIndex((v2) => v2.id === v.id) === i)
             .map((post) => {
               return (
                 <div key={'post' + post.id} className='card'>
-                  {Post(post, reload)}
+                  {Post(post, posts, setPosts)}
                   <IconButton
                     className='add-comment'
                     variant='contained'

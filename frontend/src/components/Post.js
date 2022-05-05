@@ -9,11 +9,16 @@ const isVisible = (isAdmin, isOwner) => {
   return isAdmin || isOwner == true ? 'inherit' : 'none';
 };
 
-function Post(post) {
+function Post(post, posts, setPosts) {
   const deletePost = (e) => {
     const id = e.target.getAttribute('data-id');
     PostService.deletePost(id).then((res) => {
-      window.location.reload(false);
+      setPosts(
+        posts.filter((value, index, array) => {
+          return value.id.toString() !== id;
+        })
+      );
+
       return JSON.stringify(res);
     });
   };
