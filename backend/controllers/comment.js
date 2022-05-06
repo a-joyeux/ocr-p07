@@ -13,7 +13,7 @@ function createComment(res, req, next) {
 }
 
 function getAllComment(res, req, next) {
-  return Comment.findAll({ include: { model: User, attributes: ['id', 'email'] } })
+  return Comment.findAll({ include: { model: User, attributes: ['id', 'firstName', 'lastName'] } })
     .then((comments) => {
       if (comments.length == 0) next(new ErrorHandler(404, 'POST_ERR_004', ['Comment not found']));
       else {

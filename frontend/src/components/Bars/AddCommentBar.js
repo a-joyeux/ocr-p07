@@ -4,17 +4,14 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import PostModal from '../components/PostModal';
-import LogoutIcon from '@mui/icons-material/Logout';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
-import AuthService from '../services/auth';
 
-export default function TopBar(title, reload) {
+export default function AddCommentBar(title) {
   let navigate = useNavigate();
 
   const handleClickOpen = () => {
-    AuthService.logout();
-    navigate('/', { replace: true });
+    navigate(-1);
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -28,12 +25,11 @@ export default function TopBar(title, reload) {
             aria-label='menu'
             sx={{ mr: 2 }}
           >
-            <LogoutIcon />
+            <ArrowBackIcon />
           </IconButton>
           <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
             <>{title}</>
           </Typography>
-          {PostModal(reload)}
         </Toolbar>
       </AppBar>
     </Box>

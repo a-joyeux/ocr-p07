@@ -3,13 +3,29 @@ import './styles/Comment.scss';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import IconButton from '@mui/material/IconButton';
 import AuthService from '../services/auth';
+import { useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import CommentService from '../services/comment';
 
 const isVisible = (isAdmin, isOwner) => {
   return isAdmin || isOwner == true ? 'inline' : 'none';
 };
 
-function Comment(comments, reload) {
+function Comment(postId) {
+  const [comments, setComments] = useState([]);
+  const [refresh, setRefresh] = useState(0);
+
+ 
+  const reload = () => {
+    setRefresh(refresh + 1);
+  };
+
+  useEffect(() => {
+    CommentService.getComment(postId).then((res) => {
+      setComments(res.data);
+    });
+  }, [refresh]);
+
   const deleteComment = (e) => {
     const id = e.target.getAttribute('data-id');
     CommentService.deleteComment(id).then((res) => {
@@ -17,7 +33,6 @@ function Comment(comments, reload) {
       return JSON.stringify(res);
     });
   };
-
   if (comments.length > 0) {
     return (
       <div className='comment-list'>
@@ -55,6 +70,8 @@ function Comment(comments, reload) {
           })}
       </div>
     );
+  } else {
+    return <span>Aucun commentaire</span>;
   }
 }
 

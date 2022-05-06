@@ -2,17 +2,13 @@ import PostService from '../services/post';
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import Post from '../components/Post';
-import Comment from '../components/Comment';
 import AddCommentIcon from '@mui/icons-material/AddComment';
 import IconButton from '@mui/material/IconButton';
-import CommentInput from '../components/CommentInput';
 import Snackbar from '@mui/material/Snackbar';
 import Container from '@mui/material/Container';
-import TopBar from '../components/AppBar';
+import TopBar from '../components/Bars/AppBar';
 import AuthService from '../services/auth';
 import './styles/homepage.scss';
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
 import { useNavigate } from 'react-router-dom';
 
 function HomePage() {
@@ -26,7 +22,6 @@ function HomePage() {
   const [alertMessage, setAlertMessage] = useState('');
   const [postId, setPostId] = useState(0);
   const [refresh, setRefresh] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
 
   const reload = () => {
     setRefresh(refresh + 1);
@@ -44,7 +39,6 @@ function HomePage() {
   };
 
   useEffect(() => {
-    setIsLoading(false);
     if (!AuthService.getCurrentUser()) {
       navigate('/', { replace: true });
     }
@@ -74,13 +68,12 @@ function HomePage() {
                   >
                     <AddCommentIcon />
                   </IconButton>
-                  {Comment(post.Comments, reload)}
                 </div>
               );
             })}
-          {totalPages !== page && <button onClick={() => setPage(page + 1)}>{'Load More'}</button>}
+          {totalPages !== page + 1 && <button onClick={() => setPage(page + 1)}>{'Voir plus'}</button>}
         </div>
-        {CommentInput(postId, reload, openModal, open, openAlert, alertMessage)}
+
         <Snackbar
           open={openAlert}
           autoHideDuration={2000}

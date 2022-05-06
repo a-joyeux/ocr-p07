@@ -4,7 +4,6 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Box from '@mui/material/Box';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
-import SendIcon from '@mui/icons-material/Send';
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
 import { useNavigate } from 'react-router-dom';
