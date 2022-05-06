@@ -15,7 +15,6 @@ function Comment(postId) {
   const [comments, setComments] = useState([]);
   const [refresh, setRefresh] = useState(0);
 
- 
   const reload = () => {
     setRefresh(refresh + 1);
   };

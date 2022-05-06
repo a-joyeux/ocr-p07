@@ -34,8 +34,9 @@ function HomePage() {
   };
 
   const handleClick = (e) => {
-    setPostId(e.currentTarget.getAttribute('data-id'));
-    setOpenModal(true);
+    const id = e.currentTarget.getAttribute('data-id');
+    console.log(e.currentTarget.getAttribute('data-id'));
+    navigate('/comment?postId=' + id);
   };
 
   useEffect(() => {
