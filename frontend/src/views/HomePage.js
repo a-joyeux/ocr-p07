@@ -35,7 +35,6 @@ function HomePage() {
 
   const handleClick = (e) => {
     const id = e.currentTarget.getAttribute('data-id');
-    console.log(e.currentTarget.getAttribute('data-id'));
     navigate('/comment?postId=' + id);
   };
 
