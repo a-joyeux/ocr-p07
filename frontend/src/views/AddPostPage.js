@@ -5,25 +5,34 @@ import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { useLocation } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import SendIcon from '@mui/icons-material/Send';
 import AddCommentBar from '../components/Bars/AddCommentBar';
-import CommentService from '../services/comment';
+import PostService from '../services/post';
 
-function AddCommentPage() {
+function AddPostPage() {
   let navigate = useNavigate();
+  const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [error, setError] = useState([]);
-  const query = useLocation().search;
-  const postId = new URLSearchParams(query).get('postId');
   var visibilityState = error.length > 0 ? 'visible' : 'hidden';
 
   return (
     <>
-      {AddCommentBar('Nouveau commentaire', postId)}
+      {AddCommentBar('Nouveau post')}
       <Container className='container' maxWidth='sm'>
-        <Box className='commentPage'>
+        <Box className='postPage'>
+          <TextField
+            id='title'
+            size='small'
+            label='Titre du post'
+            margin='normal'
+            type='message'
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            InputLabelProps={{ shrink: true }}
+            variant='outlined'
+          />
           <TextField
             id='content'
             size='small'
@@ -40,15 +49,15 @@ function AddCommentPage() {
           <Button
             onClick={(event) => {
               event.preventDefault();
-              CommentService.addComment(content, postId)
+              PostService.createPost(title, content)
                 .then((response) => {
-                  navigate('/comment?postId=' + postId);
+                  navigate('/home');
                 })
                 .catch((err) => {
                   setError(err.response.data.message);
                 });
             }}
-            disabled={content ? false : true}
+            disabled={content && title ? false : true}
             type='submit'
             sx={{ mt: '20px' }}
             variant='contained'
@@ -66,4 +75,4 @@ function AddCommentPage() {
   );
 }
 
-export default AddCommentPage;
+export default AddPostPage;

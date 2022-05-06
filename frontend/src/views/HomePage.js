@@ -2,12 +2,12 @@ import PostService from '../services/post';
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import Post from '../components/Post';
-import AddCommentIcon from '@mui/icons-material/AddComment';
 import IconButton from '@mui/material/IconButton';
 import Snackbar from '@mui/material/Snackbar';
 import Container from '@mui/material/Container';
 import TopBar from '../components/Bars/AppBar';
 import AuthService from '../services/auth';
+import ForumIcon from '@mui/icons-material/Forum';
 import './styles/homepage.scss';
 import { useNavigate } from 'react-router-dom';
 
@@ -67,7 +67,7 @@ function HomePage() {
                     fontSize='small'
                     onClick={handleClick}
                   >
-                    <AddCommentIcon />
+                    <ForumIcon />
                   </IconButton>
                 </div>
               );
