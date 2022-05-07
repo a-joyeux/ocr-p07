@@ -22,7 +22,7 @@ export default function TopBar(title, reload) {
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position='static'>
+      <AppBar position='static' sx={{ background: '#091F43' }}>
         <Toolbar>
           <IconButton onClick={disconnect} size='large' edge='start' color='inherit' aria-label='menu' sx={{ mr: 2 }}>
             <LogoutIcon />

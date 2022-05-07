@@ -84,7 +84,6 @@ function FormLogin() {
         <Alert style={{ visibility: visibilityState }} severity='error'>
           {error}
         </Alert>
-        ;
       </Box>
     </React.Fragment>
   );

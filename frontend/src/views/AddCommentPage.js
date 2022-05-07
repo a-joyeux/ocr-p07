@@ -10,6 +10,7 @@ import Container from '@mui/material/Container';
 import SendIcon from '@mui/icons-material/Send';
 import AddCommentBar from '../components/Bars/AddCommentBar';
 import CommentService from '../services/comment';
+import './styles/addcommentpage.scss';
 
 function AddCommentPage() {
   let navigate = useNavigate();
@@ -23,7 +24,7 @@ function AddCommentPage() {
     <>
       {AddCommentBar('Nouveau commentaire', postId)}
       <Container className='container' maxWidth='sm'>
-        <Box className='commentPage'>
+        <Box className='add-comment-page'>
           <TextField
             id='content'
             size='small'

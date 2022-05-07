@@ -11,7 +11,7 @@ const isVisible = (isAdmin, isOwner) => {
 
 function Post(post, posts, setPosts) {
   const deletePost = (e) => {
-    const id = e.target.getAttribute('data-id');
+    const id = e.currentTarget.getAttribute('data-id');
     PostService.deletePost(id).then((res) => {
       setPosts(
         posts.filter((value, index, array) => {

@@ -15,7 +15,7 @@ export default function AddCommentBar(title) {
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position='static'>
+      <AppBar position='static' sx={{ background: '#091F43' }}>
         <Toolbar>
           <IconButton
             onClick={handleClickOpen}

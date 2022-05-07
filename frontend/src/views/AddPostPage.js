@@ -9,6 +9,7 @@ import Container from '@mui/material/Container';
 import SendIcon from '@mui/icons-material/Send';
 import AddCommentBar from '../components/Bars/AddCommentBar';
 import PostService from '../services/post';
+import './styles/addpostpage.scss';
 
 function AddPostPage() {
   let navigate = useNavigate();
@@ -21,7 +22,7 @@ function AddPostPage() {
     <>
       {AddCommentBar('Nouveau post')}
       <Container className='container' maxWidth='sm'>
-        <Box className='postPage'>
+        <Box className='add-post-page'>
           <TextField
             id='title'
             size='small'
