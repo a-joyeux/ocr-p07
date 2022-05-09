@@ -2,13 +2,13 @@
 
 ## Prérequis
 
-Vous devez au préalable installation sur votre machine :
+Vous devez au préalable installer sur votre machine :
 
 - MySQL Server
 - NodeJs
 - npm
 
-> Afin d'accéder aux fonctionnalités de modérateur il est nécéssaire de modifier la colonne role d'un utilisateur existant
+> Afin d'accéder aux fonctionnalités de modérateur vous devez mettre à jour un utilisateur depuis la base de donnée
 
         update users set role='ADMIN' where id=<user_id>
 
