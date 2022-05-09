@@ -1,5 +1,9 @@
 .logo {
   display: flex;
-  margin: auto;
-  width: 50%;
+  justify-content: center;
+
+  img {
+    width: 220px;
+    height: 300px;
+  }
 }

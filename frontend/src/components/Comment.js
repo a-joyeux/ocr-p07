@@ -3,7 +3,6 @@ import './styles/Comment.scss';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import IconButton from '@mui/material/IconButton';
 import AuthService from '../services/auth';
-import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import CommentService from '../services/comment';
 

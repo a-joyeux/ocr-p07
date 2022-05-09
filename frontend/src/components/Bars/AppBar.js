@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AuthService from '../../services/auth';
-import '../styles/AppBar.scss';
 
 export default function TopBar(title, reload) {
   let navigate = useNavigate();

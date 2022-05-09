@@ -1,10 +1,14 @@
-import * as React from "react";
-import logo from "../img/icon-above-font.svg";
-import "./styles/logo.scss";
+import * as React from 'react';
+import logo from '../img/icon-above-font.svg';
+import './styles/logo.scss';
 
 class Logo extends React.Component {
   render() {
-    return <img className="logo" src={logo}></img>;
+    return (
+      <div className='logo'>
+        <img className='logo-img' alt='logo' src={logo}></img>
+      </div>
+    );
   }
 }
 
