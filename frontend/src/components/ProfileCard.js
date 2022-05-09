@@ -2,12 +2,11 @@ import * as React from 'react';
 import Chip from '@mui/material/Chip';
 import DeleteIcon from '@mui/icons-material/Delete';
 import './styles/ProfileCard.scss';
-
-const handleClick = () => {
-  console.info('You clicked the delete icon.');
-};
+import AuthService from '../services/auth';
+import { useNavigate } from 'react-router-dom';
 
 function ProfileCard(user) {
+  let navigate = useNavigate();
   return (
     <>
       <div className='profile-card'>
@@ -30,7 +29,16 @@ function ProfileCard(user) {
             year: 'numeric',
           })}
         </span>
-        <Chip className='profile-btn-delete' label='Supprimer le compte' onClick={handleClick} icon={<DeleteIcon />} />
+        <Chip
+          className='profile-btn-delete'
+          label='Supprimer le compte'
+          onClick={() => {
+            AuthService.deleteUser(AuthService.getCurrentUser().id);
+            AuthService.logout();
+            navigate('/', { replace: true });
+          }}
+          icon={<DeleteIcon />}
+        />
       </div>
     </>
   );

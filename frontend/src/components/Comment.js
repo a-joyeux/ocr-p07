@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './styles/Comment.scss';
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import IconButton from '@mui/material/IconButton';
 import AuthService from '../services/auth';
 import { useLocation } from 'react-router-dom';
@@ -58,8 +58,9 @@ function Comment(postId) {
                       color='error'
                       aria-label='delete'
                       onClick={deleteComment}
+                      size='small'
                     >
-                      <RemoveCircleOutlineIcon data-id={comment.id} sx={{ fontSize: 14 }} />
+                      <DeleteForeverIcon size='small' data-id={comment.id} sx={{ fontSize: 14 }} />
                     </IconButton>
                   </span>
                 </div>

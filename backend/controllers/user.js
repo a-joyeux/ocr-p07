@@ -20,6 +20,18 @@ function createUser(res, req, next) {
     });
 }
 
+function deleteUser(res, req, next) {
+  return User.destroy({
+    where: {
+      id: req.params.id,
+    },
+  }).then((destroyed) => {
+    if (destroyed) {
+      res.status(200).json({ status: 'SUCCESS', message: 'User deleted successfully' });
+    } else next(new ErrorHandler(404, 'USER_ERR_004', ['Post not found']));
+  });
+}
+
 function login(res, req, next) {
   return User.findOne({
     where: { email: req.body.email },
@@ -48,4 +60,4 @@ function login(res, req, next) {
     });
 }
 
-module.exports = { createUser, login };
+module.exports = { createUser, login, deleteUser };

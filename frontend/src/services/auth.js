@@ -27,6 +27,13 @@ const login = (email, password) => {
 const logout = () => {
   localStorage.removeItem('user');
 };
+
+const deleteUser = (id) => {
+  return axiosInstance.delete('/api/user/' + id).then((response) => {
+    return response.data;
+  });
+};
+
 const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem('user'));
 };
@@ -46,5 +53,6 @@ const AuthService = {
   isAdmin,
   getCurrentUser,
   isOwner,
+  deleteUser,
 };
 export default AuthService;

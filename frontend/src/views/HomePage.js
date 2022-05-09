@@ -1,6 +1,8 @@
 import PostService from '../services/post';
 import * as React from 'react';
 import { useState, useEffect } from 'react';
+import Button from '@mui/material/Button';
+
 import Post from '../components/Post';
 import IconButton from '@mui/material/IconButton';
 import Snackbar from '@mui/material/Snackbar';
@@ -11,8 +13,6 @@ import ForumIcon from '@mui/icons-material/Forum';
 import './styles/homepage.scss';
 import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
-
-const style = {};
 
 function HomePage() {
   let navigate = useNavigate();
@@ -75,7 +75,16 @@ function HomePage() {
                 </div>
               );
             })}
-          {totalPages !== page && <button onClick={() => setPage(page + 1)}>{'Voir plus'}</button>}
+          {totalPages !== page && (
+            <Button
+              sx={{ width: 'fit-content', alignSelf: 'center' }}
+              variant='contained'
+              size='small'
+              onClick={() => setPage(page + 1)}
+            >
+              Voir plus
+            </Button>
+          )}
         </div>
 
         <Snackbar

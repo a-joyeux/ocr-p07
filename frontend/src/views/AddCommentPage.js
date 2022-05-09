@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
@@ -12,6 +12,7 @@ import CommentService from '../services/comment';
 import Footer from '../components/Footer';
 import './styles/addcommentpage.scss';
 import SimpleBar from '../components/Bars/SimpleBar';
+import AuthService from '../services/auth';
 
 function AddCommentPage() {
   let navigate = useNavigate();
@@ -20,6 +21,12 @@ function AddCommentPage() {
   const query = useLocation().search;
   const postId = new URLSearchParams(query).get('postId');
   var visibilityState = error.length > 0 ? 'visible' : 'hidden';
+
+  useEffect(() => {
+    if (!AuthService.getCurrentUser()) {
+      navigate('/', { replace: true });
+    }
+  });
 
   return (
     <>

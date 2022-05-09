@@ -1,5 +1,5 @@
 import * as React from 'react';
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import IconButton from '@mui/material/IconButton';
 import './styles/post.scss';
 import AuthService from '../services/auth';
@@ -44,10 +44,10 @@ function Post(post, posts, setPosts) {
           data-id={post.id}
           onClick={deletePost}
           sx={{ display: isVisible(AuthService.isAdmin(), AuthService.isOwner(post.author)) }}
-          color='error'
           aria-label='delete'
+          size='small'
         >
-          <RemoveCircleOutlineIcon data-id={post.id} fontSize='small' />
+          <DeleteForeverIcon sx={{ color: 'white' }} data-id={post.id} fontSize='small' />
         </IconButton>
       </div>
       <div className='post-content'>{post.content}</div>
