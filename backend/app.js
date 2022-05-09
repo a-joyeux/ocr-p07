@@ -24,7 +24,7 @@ try {
   db.authenticate().then(() => {
     app.listen(port, () => {
       console.log(`Example app listening on port ${port}`);
-      db.sync({ force: true }).then(() => {
+      db.sync({ alter: true }).then(() => {
         console.log('All models synched');
       });
     });
