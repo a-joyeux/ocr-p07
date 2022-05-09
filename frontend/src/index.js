@@ -8,6 +8,8 @@ import SignUpPage from './views/SignUpPage';
 import CommentPage from './views/CommentPage';
 import AddCommentPage from './views/AddCommentPage';
 import AddPostPage from './views/AddPostPage';
+import Footer from './components/Footer';
+import ProfilePage from './views/ProfilePage';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,6 +21,7 @@ ReactDOM.render(
         <Route path='/comment' element={<CommentPage />} />
         <Route path='/comment/new' element={<AddCommentPage />} />
         <Route path='/post/new' element={<AddPostPage />} />
+        <Route path='/profile' element={<ProfilePage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

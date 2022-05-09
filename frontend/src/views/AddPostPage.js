@@ -7,8 +7,9 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import SendIcon from '@mui/icons-material/Send';
-import AddCommentBar from '../components/Bars/AddCommentBar';
 import PostService from '../services/post';
+import Footer from '../components/Footer';
+import SimpleBar from '../components/Bars/SimpleBar';
 import './styles/addpostpage.scss';
 
 function AddPostPage() {
@@ -20,7 +21,7 @@ function AddPostPage() {
 
   return (
     <>
-      {AddCommentBar('Nouveau post')}
+      {SimpleBar('Nouveau post')}
       <Container className='container' maxWidth='sm'>
         <Box className='add-post-page'>
           <TextField
@@ -72,6 +73,7 @@ function AddPostPage() {
           </Alert>
         </Box>
       </Container>
+      <Footer />
     </>
   );
 }

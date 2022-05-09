@@ -8,9 +8,10 @@ import Button from '@mui/material/Button';
 import { useLocation } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import SendIcon from '@mui/icons-material/Send';
-import AddCommentBar from '../components/Bars/AddCommentBar';
 import CommentService from '../services/comment';
+import Footer from '../components/Footer';
 import './styles/addcommentpage.scss';
+import SimpleBar from '../components/Bars/SimpleBar';
 
 function AddCommentPage() {
   let navigate = useNavigate();
@@ -22,7 +23,7 @@ function AddCommentPage() {
 
   return (
     <>
-      {AddCommentBar('Nouveau commentaire', postId)}
+      {SimpleBar('Nouveau commentaire', postId)}
       <Container className='container' maxWidth='sm'>
         <Box className='add-comment-page'>
           <TextField
@@ -63,6 +64,7 @@ function AddCommentPage() {
           </Alert>
         </Box>
       </Container>
+      <Footer />
     </>
   );
 }

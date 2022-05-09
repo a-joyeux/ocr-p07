@@ -1,18 +1,14 @@
 import * as React from 'react';
 import Container from '@mui/material/Container';
-import CommentBar from '../components/Bars/CommentBar';
-import Comment from '../components/Comment';
-import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
-
 import AuthService from '../services/auth';
+import SimpleBar from '../components/Bars/SimpleBar';
+import ProfileCard from '../components/ProfileCard';
 
-function CommentPage() {
+function ProfilePage() {
   let navigate = useNavigate();
-  const query = useLocation().search;
-  const postId = new URLSearchParams(query).get('postId');
 
   useEffect(() => {
     if (!AuthService.getCurrentUser()) {
@@ -22,13 +18,13 @@ function CommentPage() {
 
   return (
     <>
-      {CommentBar('Commentaires', postId)}
+      {SimpleBar('Profile')}
       <Container className='container' maxWidth='sm'>
-        {Comment(postId)}
+        {ProfileCard(AuthService.getCurrentUser())}
       </Container>
       <Footer />
     </>
   );
 }
 
-export default CommentPage;
+export default ProfilePage;

@@ -9,12 +9,15 @@ import TopBar from '../components/Bars/AppBar';
 import AuthService from '../services/auth';
 import ForumIcon from '@mui/icons-material/Forum';
 import './styles/homepage.scss';
+import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
+
+const style = {};
 
 function HomePage() {
   let navigate = useNavigate();
   const size = 2;
-  const [totalPages, setTotalPages] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const [page, setPage] = useState(0);
   const [posts, setPosts] = useState([]);
   const [openModal, setOpenModal] = useState(false);
@@ -51,6 +54,7 @@ function HomePage() {
   return (
     <>
       {TopBar("Fil d'actualité", reload)}
+
       <Container className='container' maxWidth='md'>
         <div className='postList'>
           {posts
@@ -71,7 +75,7 @@ function HomePage() {
                 </div>
               );
             })}
-          {totalPages !== page + 1 && <button onClick={() => setPage(page + 1)}>{'Voir plus'}</button>}
+          {totalPages !== page && <button onClick={() => setPage(page + 1)}>{'Voir plus'}</button>}
         </div>
 
         <Snackbar
@@ -83,6 +87,7 @@ function HomePage() {
           }}
         />
       </Container>
+      <Footer />
     </>
   );
 }

@@ -7,14 +7,14 @@ import IconButton from '@mui/material/IconButton';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
 
-export default function AddCommentBar(title) {
+export default function SimpleBar(title) {
   let navigate = useNavigate();
 
   const handleClickOpen = () => {
     navigate(-1);
   };
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box>
       <AppBar position='static' sx={{ background: '#091F43' }}>
         <Toolbar>
           <IconButton
