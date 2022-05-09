@@ -33,9 +33,10 @@ function ProfileCard(user) {
           className='profile-btn-delete'
           label='Supprimer le compte'
           onClick={() => {
-            AuthService.deleteUser(AuthService.getCurrentUser().id);
-            AuthService.logout();
-            navigate('/', { replace: true });
+            AuthService.deleteUser(AuthService.getCurrentUser().id).then((user) => {
+              AuthService.logout();
+              navigate('/', { replace: true });
+            });
           }}
           icon={<DeleteIcon />}
         />

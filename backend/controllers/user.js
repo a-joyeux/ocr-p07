@@ -28,7 +28,7 @@ function deleteUser(res, req, next) {
   }).then((destroyed) => {
     if (destroyed) {
       res.status(200).json({ status: 'SUCCESS', message: 'User deleted successfully' });
-    } else next(new ErrorHandler(404, 'USER_ERR_004', ['Post not found']));
+    } else next(new ErrorHandler(404, 'USER_ERR_004', ['Error during User.destroy']));
   });
 }
 

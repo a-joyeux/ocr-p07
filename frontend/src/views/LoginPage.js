@@ -1,11 +1,11 @@
 import * as React from 'react';
 import Container from '@mui/material/Container';
-import Logo from './components/Logo';
-import FormLogin from './components/FormLogin';
+import Logo from '../components/Logo';
+import FormLogin from '../components/FormLogin';
 
-import './app.scss';
+import './styles/loginpage.scss';
 
-function App() {
+function LoginPage() {
   return (
     <Container className='container' maxWidth='sm'>
       <Logo />
@@ -14,4 +14,4 @@ function App() {
   );
 }
 
-export default App;
+export default LoginPage;

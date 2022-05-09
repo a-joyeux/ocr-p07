@@ -20,20 +20,14 @@ function HomePage() {
   const [totalPages, setTotalPages] = useState(0);
   const [page, setPage] = useState(0);
   const [posts, setPosts] = useState([]);
-  const [openModal, setOpenModal] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
-  const [postId, setPostId] = useState(0);
   const [refresh, setRefresh] = useState(0);
 
   const reload = () => {
     setRefresh(refresh + 1);
     setPosts([]);
     setPage(0);
-  };
-
-  const open = (value) => {
-    setOpenModal(value);
   };
 
   const handleClick = (e) => {

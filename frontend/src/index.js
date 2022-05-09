@@ -5,7 +5,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import React, { Suspense, lazy } from 'react';
 
 const HomePage = lazy(() => import('./views/HomePage'));
-const App = lazy(() => import('./App'));
+const LoginPage = lazy(() => import('./views/LoginPage'));
 const SignUpPage = lazy(() => import('./views/SignUpPage'));
 const AddCommentPage = lazy(() => import('./views/AddCommentPage'));
 const AddPostPage = lazy(() => import('./views/AddPostPage'));
@@ -15,9 +15,15 @@ const ProfilePage = lazy(() => import('./views/ProfilePage'));
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Suspense fallback={<CircularProgress className='loader'></CircularProgress>}>
+      <Suspense
+        fallback={
+          <div className='overlay'>
+            <CircularProgress className='loader'></CircularProgress>
+          </div>
+        }
+      >
         <Routes>
-          <Route path='/' element={<App />} />
+          <Route path='/' element={<LoginPage />} />
           <Route path='/home' element={<HomePage />} />
           <Route path='/signup' element={<SignUpPage />} />
           <Route path='/comment' element={<CommentPage />} />
