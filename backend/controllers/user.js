@@ -20,8 +20,24 @@ function createUser(res, req, next) {
     });
 }
 
+function getUserInfos(res, req, next) {
+  return User.findOne({
+    where: { id: req.params.id },
+    attributes: ['id', 'lastName', 'firstName', 'createdAt', 'updatedAt'],
+  })
+    .then((user) => {
+      res.status(200).json(user);
+    })
+    .catch((error) => {
+      console.log(error);
+      next(new ErrorHandler(404, 'USER_ERR_003', ['User not found']));
+    });
+}
+
 function login(res, req, next) {
-  return User.findOne({ where: { email: req.body.email } })
+  return User.findOne({
+    where: { email: req.body.email },
+  })
     .then((user) => {
       bcrypt.compare(req.body.password, user.password).then((result) => {
         if (result) {
@@ -37,4 +53,4 @@ function login(res, req, next) {
     });
 }
 
-module.exports = { createUser, login };
+module.exports = { createUser, login, getUserInfos };
