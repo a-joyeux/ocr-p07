@@ -20,13 +20,17 @@ function Comment(postId) {
   };
 
   useEffect(() => {
-    CommentService.getComment(postId).then((res) => {
-      setComments(res.data);
-    });
+    CommentService.getComment(postId)
+      .then((res) => {
+        setComments(res.data);
+      })
+      .catch((error) => {
+        setComments([]);
+      });
   }, [refresh]);
 
   const deleteComment = (e) => {
-    const id = e.target.getAttribute('data-id');
+    const id = e.currentTarget.getAttribute('data-id');
     CommentService.deleteComment(id).then((res) => {
       reload();
       return JSON.stringify(res);

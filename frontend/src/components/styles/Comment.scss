@@ -1,10 +1,15 @@
 .comment-list {
   width: 100%;
+  display: flex;
+  flex-direction: column;
   padding: 5px 0px 15px 5px;
+  gap: 15px;
   .comment {
     display: flex;
     flex-direction: column;
-    padding: 0px 10px 0px 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 25px;
+    padding: 0px 20px 0px 20px;
     .author {
       font-weight: bold;
     }
