@@ -13,10 +13,6 @@ router.post('/api/login', function (req, res, next) {
   User.login(res, req, next).catch((error) => next(error));
 });
 
-router.get('/api/user/:id', auth, function (req, res, next) {
-  User.getUserInfos(res, req, next).catch((error) => next(error));
-});
-
 router.get('/api/post', auth, function (req, res, next) {
   Post.getAllPost(res, req, next).catch((error) => next(error));
 });

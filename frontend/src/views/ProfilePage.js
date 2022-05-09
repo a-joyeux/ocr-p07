@@ -20,6 +20,7 @@ function ProfilePage() {
     <>
       {SimpleBar('Profile')}
       <Container className='container' maxWidth='sm'>
+        <h3>Informations personelles</h3>
         {ProfileCard(AuthService.getCurrentUser())}
       </Container>
       <Footer />
